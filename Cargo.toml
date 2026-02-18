@@ -1,0 +1,62 @@
+[workspace]
+resolver = "2"
+members = [
+    "skopos",
+    "skopos-common",
+    "skopos-ebpf",
+]
+default-members = ["skopos", "skopos-common"]
+
+[workspace.package]
+license = "MIT OR Apache-2.0"
+edition = "2021"
+
+[workspace.dependencies]
+
+# ---- Aya ----
+aya = { version = "0.13", features = ["async_tokio"] }
+aya-build = { git = "https://github.com/aya-rs/aya" }
+aya-ebpf = { version = "0.1.1" }
+aya-log = { version = "0.2" }
+aya-log-ebpf = { git = "https://github.com/aya-rs/aya" }
+
+# ---- Async runtime ----
+tokio = { version = "1.40", features = [
+    "macros",
+    "rt-multi-thread",
+    "net",
+    "signal",
+    "sync"
+] }
+
+# ---- Kubernetes (Rustls ONLY) ----
+kube = { version = "0.98.0", default-features = false, features = [
+    "client",
+    "runtime",
+    "derive",
+    "rustls-tls"
+] }
+
+# ---- Utilities ----
+bytes = { version = "1.5", default-features = false }
+anyhow = "1"
+env_logger = "0.11"
+libc = "0.2"
+log = "0.4"
+
+clap = { version = "4.5", features = ["derive", "std"] }
+cargo_metadata = "0.23"
+which = "6"
+
+# ---- Workspace crate ----
+skopos-common = { path = "./skopos-common" }
+
+[profile.release]
+lto = true
+panic = "abort"
+codegen-units = 1
+strip = true
+
+[profile.release.package.skopos-ebpf]
+debug = 2
+codegen-units = 1
