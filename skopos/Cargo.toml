@@ -28,8 +28,12 @@ walkdir = "2.5.0"
 regex = "1.12.3"
 lazy_static = "1.5.0"
 kube.workspace = true
+reqwest.workspace = true
 dashmap = "6.1.0"
 futures = "0.3.32"
+serde.workspace = true
+serde_json.workspace = true
+
 [build-dependencies]
 anyhow = { workspace = true }
 aya-build = { workspace = true }

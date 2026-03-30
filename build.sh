@@ -17,10 +17,13 @@ enable-tracefs() {
     docker exec ${NODE_CONTAINER_ID} mount -t tracefs nodev /sys/kernel/tracing
 }
 
+
 main() {
     build
     copy-binary
     enable-tracefs
+
+    # export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 }
 
 main "$@"

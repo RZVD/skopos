@@ -12,6 +12,6 @@ aya = ["dep:aya"]
 
 [dependencies]
 aya = { workspace = true, optional = true }
-
+serde = { version = "1.0", default-features = false, features = ["derive"] }
 [lib]
 path = "src/lib.rs"
